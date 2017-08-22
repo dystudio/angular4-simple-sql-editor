@@ -166,7 +166,6 @@ export class TextAreaHtmlStringExampleComponent {
 
     // click 시 caret position 조정.
     rePosition = (clickElement: any, currentText: string) => {
-        console.log('view rePosition => clickElement : ', clickElement, ', currentText : ', currentText);
         if (!clickElement) {
             return 0;
         }
