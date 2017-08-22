@@ -182,8 +182,6 @@ export class TextAreaHtmlStringExampleComponent {
             addPosition = 1;
         } else if (clickElement.className === 'where' && checkWord.length === 3) {
             addPosition = 1;
-        }  else {
-            addPosition = 0;
         }
         return addPosition;
     }

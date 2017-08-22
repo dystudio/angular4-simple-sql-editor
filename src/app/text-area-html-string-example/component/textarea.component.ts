@@ -117,9 +117,11 @@ export class TextAreaComponent {
                     const currentDomIndex = EditUtils.getWordForIndex( this.getText().substring(0, this._startPosition), this._startPosition);
                     const currentDom = this.textareaEl.nativeElement.childNodes[currentDomIndex];
                     const addIndex = this.rePosition(currentDom, this.getText().substring(0, this._startPosition));
-                    const nextDom = this.textareaEl.nativeElement.childNodes[currentDomIndex + addIndex];
-                    this.textareaService.setElementAfterFocus(this.textareaEl.nativeElement, nextDom);
-                    this._startPosition = this.textareaService.getPosition(this.textareaEl.nativeElement);
+                    if (addIndex !== 0) {
+                        const nextDom = this.textareaEl.nativeElement.childNodes[currentDomIndex + addIndex];
+                        this.textareaService.setElementAfterFocus(this.textareaEl.nativeElement, nextDom);
+                        this._startPosition = this.textareaService.getPosition(this.textareaEl.nativeElement);
+                    }
                 }
                 this.editingFocusOn.emit(new EditEventType(event, this.textareaEl.nativeElement.innerText, this._startPosition));
             }
