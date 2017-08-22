@@ -1,0 +1,27 @@
+<div class="text-area-container">
+            <div class="text-area-body">
+                <div>
+                    <app-text-area-component #textarea
+                                             [rePosition]="rePosition"
+                                             (editingInit)="onEditStart($event)"
+                                             (editingFocusOn)="onEditingFocus($event)"
+                                             (editingEnd)="onEditEnd($event)"
+                                             (keyChange)="onKeyChange($event)"
+                                             (wordComplete)="onWordComplete($event)"
+                                             (keyComplete)="onKeyComplete($event)">
+                    </app-text-area-component>
+                    <app-word-list-component [items]="items"
+                                             [word]="_currentText"
+                                             [boxPosition]="boxPosition"
+                                             [isFocusing]="isFocusing"
+                                             (wordSelect)="onWordSelect($event)"></app-word-list-component>
+                </div>
+                <div>
+                    <button (click)="clear();">Clear</button>
+                </div>
+                <br>
+                <div style="width:100%;">
+                    {{sqlText}}
+                </div>
+            </div>
+        </div>
