@@ -19,37 +19,6 @@ export class EditUtils {
                 pushCnt--;
             }
         }
-        console.log(index, '  getWordForIndex : ', prevText.length, prevText, index, realWords);
         return realWords.length;
     }
-
-    static checkingWord(text: string, word: string): boolean {
-        const reg = new RegExp(word);
-        const testing: boolean = reg.test( text );
-        return testing;
-    }
-
-    static setCaretPosition(targetEl: any, index: number = 0) {
-        const node = targetEl;
-        node.focus();
-        const textNode = node.firstChild;
-        const range: any = document.createRange();
-        range.setStart(textNode, index);
-        range.setEnd(textNode, index);
-        const sel: any = window.getSelection();
-        sel.removeAllRanges();
-        sel.addRange(range);
-    }
-
-    static setLastFocus(targetEl: any) {
-        const range = document.createRange();
-        const node = targetEl.lastChild;
-        range.setStartAfter(node);
-        const sel = window.getSelection();
-        range.collapse(true);
-        sel.removeAllRanges();
-        sel.addRange(range);
-        targetEl.focus();
-    }
-
 }

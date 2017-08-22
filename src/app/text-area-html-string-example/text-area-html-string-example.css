@@ -77,6 +77,11 @@ span *:after {
     content: '\200B';
 }
 
+.bold {
+    font-weight: bold;
+    color: lightcoral;
+}
+
 button {
     width: 50px;
     height: 30px;
