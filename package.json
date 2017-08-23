@@ -1,7 +1,7 @@
 {
   "name": "angularjs4-textarea-component",
   "version": "0.0.0",
-  "author": "Kennet HyoSeon Kang <kkang>",
+  "author": "Kenneth HyoSeon Kang <kkang>",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
