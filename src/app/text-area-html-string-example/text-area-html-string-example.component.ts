@@ -5,7 +5,7 @@ import { TextAreaHtmlStringExampleService } from './text-area-html-string-exampl
 import { FakeBackendProvider } from './mock-backend/mock-data-backend.service';
 import { MockBackend, MockConnection } from '@angular/http/testing';
 import { BaseRequestOptions } from '@angular/http';
-import { EditEventType } from './model/index';
+import { EditEventType, EditLabelDictionary } from './model/index';
 import { EditUtils } from './utils/index';
 
 @Component({
@@ -31,12 +31,7 @@ export class TextAreaHtmlStringExampleComponent {
         boxY: 0
     };
     mode = EditMode.DML;
-    items: Array<any> = [
-        { id: '1', label: 'label11112' },
-        { id: '2', label: 'label2' },
-        { id: '3', label: 'label3' },
-        { id: '4', label: 'label43' },
-    ];
+    items: Array<any> = [];
     sqlText: string; // 순수 sql string
 
     _dmls: string[];
@@ -147,16 +142,16 @@ export class TextAreaHtmlStringExampleComponent {
     onWordSelect(event: string) {
         switch (this.mode) {
             case EditMode.DML :
-                ( this.textareaComponent as any).addText(event, 'dml');
+                ( this.textareaComponent as any).addText(event, EditLabelDictionary.DML);
             break;
             case EditMode.FROM :
-                ( this.textareaComponent as any).addText(event, 'from');
+                ( this.textareaComponent as any).addText(event, EditLabelDictionary.FROM);
             break;
             case EditMode.TABLE :
-                ( this.textareaComponent as any).addText(event, 'table');
+                ( this.textareaComponent as any).addText(event, EditLabelDictionary.TABLE);
             break;
             default :
-                ( this.textareaComponent as any).addText(event + this._comment, 'column');
+                ( this.textareaComponent as any).addText(event + this._comment, EditLabelDictionary.COLUMN);
             break;
         }
         setTimeout(() => {
@@ -171,15 +166,15 @@ export class TextAreaHtmlStringExampleComponent {
         }
         const checkWord = this.keywordCheck(this._dmls, currentText);
         let addPosition = 0;
-        if (clickElement.className === 'from' && checkWord.length === 1) {
+        if (clickElement.className === EditLabelDictionary.FROM && checkWord.length === 1) {
             addPosition = -1;
-        } else if (clickElement.className === 'dml' && checkWord.length === 1) {
+        } else if (clickElement.className === EditLabelDictionary.DML && checkWord.length === 1) {
             addPosition = 1;
-        } else if (clickElement.className === 'from' && checkWord.length === 2) {
+        } else if (clickElement.className === EditLabelDictionary.FROM && checkWord.length === 2) {
             addPosition = 1;
-        } else if (clickElement.className === 'table' && checkWord.length === 2) {
+        } else if (clickElement.className === EditLabelDictionary.TABLE && checkWord.length === 2) {
             addPosition = 1;
-        } else if (clickElement.className === 'where' && checkWord.length === 3) {
+        } else if (clickElement.className === EditLabelDictionary.WHERE && checkWord.length === 3) {
             addPosition = 1;
         }
         return addPosition;

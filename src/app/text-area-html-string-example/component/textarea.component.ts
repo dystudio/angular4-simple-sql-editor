@@ -137,13 +137,11 @@ export class TextAreaComponent {
     onKeyup(event: any) {
         if (event.keyCode === 8) {// 8 : backspace
             this._endPosition--;
+            this.keyComplete.emit(new EditEventType(event, this.textareaEl.nativeElement.innerText));
             if (this._endPosition < 0) {
                 this._endPosition = 0;
                 this._currentEditing = '';
-                if (this.textareaEl.nativeElement.innerText.trim() === '') {
-                    this.keyComplete.emit(new EditEventType(event, this.textareaEl.nativeElement.innerText));
-                    return;
-                }
+                return;
             }
         } else if (event.keyCode === 32) {// 32 : space
             this._startPosition = this.textareaService.getPosition(this.textareaEl.nativeElement);
