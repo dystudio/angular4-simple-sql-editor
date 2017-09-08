@@ -1,9 +1,9 @@
-import { Http, BaseRequestOptions, Response, ResponseOptions, RequestMethod } from '@angular/http';
+import { Http, BaseRequestOptions, Response, ResponseOptions, RequestOptions, RequestMethod } from '@angular/http';
 import { MockBackend, MockConnection } from '@angular/http/testing';
 
 import { DML, TABLE_NAMES, TEST_TABLE1, TEST_TABLE2, TEST_TABLE1_COLUMNS, TEST_TABLE2_COLUMNS } from './data/backend-data';
 
-export function FakeBackendFactory(backend: MockBackend, options: BaseRequestOptions) {
+export function FakeBackendFactory(backend: MockBackend, options: BaseRequestOptions, realBackend: XHRBackend) {
 
     const data: any = {
         'tables': TABLE_NAMES,
@@ -41,6 +41,23 @@ export function FakeBackendFactory(backend: MockBackend, options: BaseRequestOpt
                 connection.mockRespond(new Response(
                     new ResponseOptions({ status: 200, body: data['test_table1'] })
                 ));
+            } else {
+                const realHttp = new Http(realBackend, options);
+                const requestOptions = new RequestOptions({
+                    method: connection.request.method,
+                    headers: connection.request.headers,
+                    body: connection.request.getBody(),
+                    url: connection.request.url,
+                    withCredentials: connection.request.withCredentials,
+                    responseType: connection.request.responseType
+                });
+                realHttp.request(connection.request.url, requestOptions)
+                    .subscribe((response: Response) => {
+                        connection.mockRespond(response);
+                    },
+                    (error: any) => {
+                        connection.mockError(error);
+                    });
             }
         }, 300);
     });
