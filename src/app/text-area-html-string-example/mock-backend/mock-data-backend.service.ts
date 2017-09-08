@@ -1,4 +1,4 @@
-import { Http, BaseRequestOptions, Response, ResponseOptions, RequestOptions, RequestMethod } from '@angular/http';
+import { Http, BaseRequestOptions, Response, ResponseOptions, RequestOptions, RequestMethod, XHRBackend } from '@angular/http';
 import { MockBackend, MockConnection } from '@angular/http/testing';
 
 import { DML, TABLE_NAMES, TEST_TABLE1, TEST_TABLE2, TEST_TABLE1_COLUMNS, TEST_TABLE2_COLUMNS } from './data/backend-data';
